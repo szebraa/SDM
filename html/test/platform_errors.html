@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset= "UTF-8">
+		<script type = "text/javascript" src = "../jquery.min.js"></script>
+		<!--Required to reference the alex_js_SHiaI_GUI.js file in /var/www/html/ directory-->
+		<script type = "text/javascript" src = "code_under_test.js"></script>
+		<!--Required to reference the alex_css.css file in /var/www/html/ directory for styling-->
+		<link rel="stylesheet" type = "text/css" href="code_under_test.css">
+		<!--This is the title of the website (what appears in the tab)-->
+		<title> SDM Platform errors</title>
+		
+
+		
+	  <select id="Alarm Sorting">
+		<option selected>Sort Alarms by:</option>
+		<option value="Date (oldest to newest)">Date (oldest to newest)</option>
+		<option value="Generic Condition (A to Z)">Generic Condition (A to Z)</option>
+		<option value="Severity (A to Z)">Severity (A to Z)</option>
+		<option value="Affected Hosts (A to Z)">Affected Hosts (A to Z)</option>
+		<option value="Alarm text (A to Z)">Alarm text (A to Z)</option>
+		<option value="Instance count (most to least)">Instance count (most to least)</option>
+		<option value="Date (newest to oldest)">Date (newest to oldest)</option>
+		<option value="Generic Condition (Z to A)">Generic Condition (Z to A)</option>
+		<option value="Severity (Z to A)">Severity (Z to A)</option>
+		<option value="Affected Hosts (Z to A)">Affected Hosts (Z to A)</option>
+		<option value="Alarm text (Z to A)">Alarm text (Z to A)</option>
+		<option value="Instance count (least to most)">Instance count (least to most)</option>
+	  </select>
+		
+		
+		
+		
+		
+		
+	</head>
+
+	<body>
+		<!--<button onclick="myFunction()">Try it</button>-->
+		<!--
+		<div id = "left">
+			<div>
+				 <p><u><b>Alarms</b></u></p>
+			</div>
+		</div>
+		-->	
+		<table id="myTable">
+		  <th><b><u> Errors </u></b></th>
+		  <tr>
+		  
+		  </tr>
+		  <script> createErrorTable();</script>
+		</table>
+		<br>
+		<applet id="app" width=0 height=0 code="Filter.java"></applet>
+		<div id="display"></div>
+	</body>
+</html>
+

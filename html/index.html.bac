@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style>
+h1{
+  color: blue;
+  font-family: verdana;
+  font-size: 300%;
+}
+
+p{
+  border: 1px solid black;
+  padding: 49px;
+  margin: -1px;
+  color: red;
+  font-family: courier;
+  font-size: 160%;
+}
+
+</style>
+<!--This is the title of the website (what appears in the tab)-->
+<title> SDM Squad GUI for alarms</title>
+</head>
+
+<body>
+<h1> My first heading </h1>
+<p> My first paragraph </p>
+
+</body>
+</html>
+

@@ -1,0 +1,244 @@
+/*for CSS external files <style> tag and ending tags are not needed.
+For CSS internal files (inside the html), the style tags are needed*/
+
+table, td {
+  border: 2px solid black;
+  /*width: 636px;*/ /*636px*/
+  /*height: 810px;*/ /* for the tables on the next page, you wouldnt need height!*/
+  
+}
+
+
+table, tr {
+  border: 1px solid black;
+  width: 20px; /*636px*/
+  height: 20px; /* for the tables on the next page, you wouldnt need height!*/
+  
+}
+
+ table, th{
+	border: 0px ;
+	width: calc(100%); /*636px*/
+    height: 20px; /* for the tables on the next page, you wouldnt need height!*/
+	font-size: 160%;
+	
+	
+}
+
+body{  
+
+  background: #2c3e50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #c9d6ff, #fd746c); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #c9d6ff, #fd746c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+/*#fd746c*/
+/*2c3e50*/
+}
+
+
+/* start of switch settings */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 34px;
+  
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+  
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  
+}
+/*need this for starting position of switch (circle within enclosure)*/
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 90px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  
+}
+
+/* need this to transition between gray and blue*/
+input:checked + .slider {
+  background-color: gray;
+  
+}
+
+/*makes it so that slider actually changes positions*/
+input:checked + .slider:before {
+  -webkit-transform: translateX(-90px);
+  -ms-transform: translateX(-90px);
+  transform: translateX(-90px);
+  /*color: red;*/
+  /*content: "live";*/
+}
+
+/* Rounded sliders (makes enclosure round)*/
+.slider.round {
+  border-radius: 100px;
+  background-color: red/*#2196F3*/;
+}
+/* makes actual toggle a circle*/
+.slider.round:before {
+  border-radius: 50%;
+  
+}
+
+
+/*------ SETTINGS TO SHOW/HIDE TXT WITHIN THE SLIDER---------*/
+.off
+{
+  display: none;
+}
+
+.on, .off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  font-size: 12px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked+ .slider .off
+{display: block;}
+
+input:checked + .slider .on
+{display: none;}
+
+/*--------- END  OF SWITCH SETTINGS--------*/
+
+
+
+
+
+
+
+
+
+
+
+/* needed for specific div ids (to hide portion of html)*/
+#FILTER_ALARMS{
+	display:none;
+}
+
+#FILTER_NODES{
+	display:none;
+}
+
+#DOWNLOADS{
+	display:none;
+}
+
+
+#FILTER_IN_ALARM_NDS_HISTORY{
+	display:none;
+}
+
+#FILTER_IN_NODES_NDS_HISTORY{
+	display:none;
+}
+
+#DOWNLOADS_NDS_HISTORY{
+	display:none;
+}
+
+
+
+#LIVE_ONE_NDS_ALARMS_BODY
+{
+	/*display:none;*/
+	
+}
+
+#LIVE_ONE_NDS_ALARMS_HEAD
+{
+	/*display:none;*/
+}
+
+#ONE_NDS_ALARM_HISTORY_BODY
+{
+	display:none;
+	
+}
+
+
+#ONE_NDS_ALARM_HISTORY_HEAD
+{
+	display:none;
+	
+}
+
+
+#LIVE_OR_HISTORY_SWITCH
+{
+	margin-left: 80%;
+	
+}
+
+
+
+/* Style the tab */
+
+.tab {
+  overflow: hidden;
+  margin-left: 40%;
+  /*border: 1px solid #ccc;*/
+  /*background-color: #f1f1f1;*/
+}
+
+/* Style the buttons inside the tab */
+
+.tab button {
+  background-color: #f1f1f1;
+  float: left;
+  /*border: none;*/
+  outline: none;
+  cursor: pointer;
+  padding: 0px 30px;
+  margin-left: 1%;
+  transition: 0.3s;
+  font-size: 20px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #00FF00;/*7AA*/
+}
+
+#NUMBER_OF_NDS_LIVE_ALARMS
+{
+	margin-left: 70%;
+	font-size: 130%;
+}
+
+
+

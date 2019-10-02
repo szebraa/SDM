@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset= "UTF-8">
+		<!--Required for javascript graphing library -->
+		<script type = "text/javascript" src = "../plotly-latest.min.js"></script>
+		<script type = "text/javascript" src = "../jquery.min.js"></script>
+		<!--Required to reference the alex_js_SHiaI_GUI.js file in /var/www/html/ directory-->
+		<script type = "text/javascript" src = "alex_Network_KPIs.js"></script>
+		<!--Common functions shared by all files related to Network KPIs -->
+		<script type = "text/javascript" src = "commonNetworkKPIfuncs.js"></script>
+		<!--Constants shared by all files related to Network KPIs -->
+		<script type = "text/javascript" src = "constants.js"></script>
+		<!--Required to reference the alex_css.css file in /var/www/html/ directory for styling-->
+		<link rel="stylesheet" type = "text/css" href="alex_Network_KPIs.css">
+		
+		<!--This is the title of the website (what appears in the tab)-->
+		<title> SDM Network KPIs</title>
+		<div id="BDSA_TPS_KPI_head_portion" class="tabcontent">
+			<div>
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa2_on_off','bdsa2Div')" id="bdsa2_on_off"/> Display BDSA2 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa3_on_off','bdsa3Div')" id="bdsa3_on_off"/> Display BDSA3 |
+				Columns <select id="COL_BDSA_PER_PAGE">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+				<br>
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa4_on_off','bdsa4Div')" id="bdsa4_on_off"/> Display BDSA4 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa5_on_off','bdsa5Div')" id="bdsa5_on_off"/> Display BDSA5 |
+				Rows <select id="ROW_BDSA_PER_PAGE">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+				<br>
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa6_on_off','bdsa6Div')" id="bdsa6_on_off"/> Display BDSA6 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('bdsa7_on_off','bdsa7Div')" id="bdsa7_on_off"/> Display BDSA7 |
+				<button type="button" onclick="genTPSKPIGraph()">Apply to ViewSet</button>
+			</div>
+		</div>
+
+		<div id="FDS_TPS_KPI_head_portion" class="tabcontent">
+			<div>
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor001_on_off','fdstor001Div')" id="fdstor001_on_off"/> Display FDSTOR001 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor002_on_off','fdstor002Div')" id="fdstor002_on_off"/> Display FDSTOR002 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor003_on_off','fdstor003Div')" id="fdstor003_on_off"/> Display FDSTOR003 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor004_on_off','fdstor004Div')" id="fdstor004_on_off"/> Display FDSTOR004 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor005_on_off','fdstor005Div')" id="fdstor005_on_off"/> Display FDSTOR005 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor006_on_off','fdstor006Div')" id="fdstor006_on_off"/> Display FDSTOR006 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor007_on_off','fdstor007Div')" id="fdstor007_on_off"/> Display FDSTOR007 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdstor008_on_off','fdstor008Div')" id="fdstor008_on_off"/> Display FDSTOR008 |
+				<br>
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl001_on_off','fdsmtl001Div')" id="fdsmtl001_on_off"/> Display FDSMTL001 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl002_on_off','fdsmtl002Div')" id="fdsmtl002_on_off"/> Display FDSMTL002 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl003_on_off','fdsmtl003Div')" id="fdsmtl003_on_off"/> Display FDSMTL003 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl004_on_off','fdsmtl004Div')" id="fdsmtl004_on_off"/> Display FDSMTL004 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl005_on_off','fdsmtl005Div')" id="fdsmtl005_on_off"/> Display FDSMTL005 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl006_on_off','fdsmtl006Div')" id="fdsmtl006_on_off"/> Display FDSMTL006 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl007_on_off','fdsmtl007Div')" id="fdsmtl007_on_off"/> Display FDSMTL007 |
+				<input type="checkbox" checked="checked" onclick="dsToDisplay('fdsmtl008_on_off','fdsmtl008Div')" id="fdsmtl008_on_off"/> Display FDSMTL008 |
+				<br>
+				Columns <select id="COL_FDS_PER_PAGE">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+				Rows <select id="ROW_FDS_PER_PAGE">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+				<button type="button" onclick="genTPSKPIGraph()">Apply to ViewSet</button>
+			
+			</div>
+		</div>
+
+		<div class="tab">
+		  <button class="tablinks active" onclick="switchTab(event, 'BDSA_TPS_KPI_head_portion', 'BDSA_TPS_KPI_body_portion')">BDSA TPS KPI</button>
+		  <button class="tablinks" onclick="switchTab(event, 'FDS_TPS_KPI_head_portion', 'FDS_TPS_KPI_body_portion')">FDS TPS KPI</button>
+		</div>
+
+	</head>
+
+	<body>
+		<div id="title_page">
+			<div>
+				<h1><b><u>Network KPIs </u></b></h1>
+			</div>
+		</div>
+		<div id="BDSA_TPS_KPI_body_portion" class="tabcontent">
+			<div>	
+				<div id="bdsa2Div">
+					<div>
+						
+					</div>
+					
+					<div id="bdsa2breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				
+				<div id="bdsa3Div">
+					<div>
+		
+					</div>
+					<div id="bdsa3breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="bdsa4Div">
+					<div>
+		
+					</div>
+					<div id="bdsa4breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="bdsa5Div">
+					<div>
+		
+					</div>
+					<div id="bdsa5breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>		
+				<div id="bdsa6Div">
+					<div>
+		
+					</div>
+					<div id="bdsa6breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="bdsa7Div">
+					<div>
+
+					</div>
+					<div id="bdsa7breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+		
+		
+		<div id="FDS_TPS_KPI_body_portion" class="tabcontent">
+			<div>
+				<div id="fdstor001Div">
+					<div>
+						
+					</div>
+					
+					<div id="fdstor001breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				
+				<div id="fdstor002Div">
+					<div>
+		
+					</div>
+					<div id="fdstor002breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="fdstor003Div">
+					<div>
+		
+					</div>
+					<div id="fdstor003breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="fdstor004Div">
+					<div>
+		
+					</div>
+					<div id="fdstor004breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>		
+				<div id="fdstor005Div">
+					<div>
+		
+					</div>
+					<div id="fdstor005breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+				<div id="fdstor006Div">
+					<div>
+					</div>
+					<div id="fdstor006breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>		
+
+				<div id="fdstor007Div">
+					<div>
+					</div>
+					<div id="fdstor007breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+			
+				<div id="fdstor008Div">
+					<div>
+					</div>
+					<div id="fdstor008breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl001Div">
+					<div>
+					</div>
+					<div id="fdsmtl001breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>	
+
+				<div id="fdsmtl002Div">
+					<div>
+					</div>
+					<div id="fdsmtl002breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl003Div">
+					<div>
+					</div>
+					<div id="fdsmtl003breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl004Div">
+					<div>
+					</div>
+					<div id="fdsmtl004breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl005Div">
+					<div>
+					</div>
+					<div id="fdsmtl005breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl006Div">
+					<div>
+					</div>
+					<div id="fdsmtl006breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl007Div">
+					<div>
+					</div>
+					<div id="fdsmtl007breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				<div id="fdsmtl008Div">
+					<div>
+					</div>
+					<div id="fdsmtl008breaks">
+						<div>
+							<br><br>
+						</div>
+					</div>
+				</div>
+
+				
+			</div>
+		
+		</div>
+		
+	<script> genTPSKPIGraph();</script>	
+		
+	</body>
+</html>
+

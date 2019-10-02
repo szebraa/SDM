@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	  
+		<meta charset= "UTF-8">
+		<script type = "text/javascript" src = "jquery.min.js"></script>
+		<!--Required (needs to come before this page's js code to reference any global variables in the other js code-->
+		<script type = "text/javascript" src = "platform_errors/alex_platform_errors.js"></script>
+		<!--Required to reference the alex_js_SHiaI_GUI.js file in /var/www/html/ directory-->
+		<script type = "text/javascript" src = "alex_js_SHiaI_GUI.js"></script>
+		<!--Required to reference the alex_css.css file in /var/www/html/ directory for styling-->
+		<link rel="stylesheet" type = "text/css" href="alex_css.css">
+		<!--required to store constants for SHiaI JS-->
+		<script type = "text/javascript" src = "platform_errors/constants.js"></script>
+		
+		<!--This is the title of the website (what appears in the tab)-->
+		<title> SDM Health in an Instant (SHiaI)</title>
+
+		<!--
+		<div id = "center_1st_table">
+			<div>
+				<h1> Platform</h1>	<h1> Network KPIs</h1>	
+			</div>
+		</div>
+		-->
+	</head>
+
+	<body>
+		<!--<button onclick="myFunction()">Try it</button>-->
+		<!--
+		<div id = "left">
+			<div>
+				 <p><u><b>Alarms</b></u></p>
+			</div>
+		</div>
+		-->	
+		<!--This "table-layout: fixed" is required to have tables show correctly (proportional widths). It can't be placed in the css code -->
+		<table id="myTable" style = "table-layout: fixed">
+		  <th><b><u> Platform </u></b></th> <th><b><u> Network KPIs </u></b></th> <th><b><u> Provisioning KPIs </u></b></th>
+		  <tr>
+		  
+		  </tr>
+		  <script> createBoxes();</script>
+		</table>
+		<br>
+		
+
+		
+		
+
+	</body>
+</html>
+

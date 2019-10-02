@@ -1,0 +1,121 @@
+/*for CSS external files <style> tag and ending tags are not needed.
+For CSS internal files (inside the html), the style tags are needed*/
+
+
+
+
+
+
+table, td {
+  border: 1px solid black;
+  width: 636px; /*636px*/
+  height: 810px; /* for the tables on the next page, you wouldnt need height!*/
+  
+}
+
+ table, th{
+	border: 0px ;
+	width: calc(100%); /*636px*/
+    height: 20px; /* for the tables on the next page, you wouldnt need height!*/
+	font-size: 160%;
+	
+}
+
+tbody{
+	table-layout: fixed
+}
+
+
+body{  
+
+  background: #2c3e50;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #304352; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #304352, #d7d2cc); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #304352, #d7d2cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  
+/*"fresh turboscent"*/  
+background: #F1F2B5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #135058, #F1F2B5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #135058, #F1F2B5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+background: #757F9A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  
+
+}
+
+
+/* ALL CSS FORMATS BELOW THIS POINT ARE NOT USED!!*/
+h1
+{
+  color: black;
+  font-family: courier;
+  text-decoration: underline;
+  font-size: 160%;
+}
+
+p
+{
+
+  /*padding: 49px;*/
+  margin: 48px 0; /* height margin width margin*/
+  color: black;
+  font-family: courier;
+  font-size: 160%;
+}
+
+#left > div
+{
+	/*border: 1px solid black;*/
+    /*height: 1000px;*/
+    /*max-width: calc(100%/3);*/;
+	width: 200px;
+	text-align: left;
+	margin-top: -940px;
+	/*background: rgba(109,154,197,.8);*/
+}
+
+#right > div
+{
+	margin-left: calc(100%/3);
+	margin-top: -528px;
+	/*border: 1px solid black;*/
+    /*height: -100px;1000px;*/
+    /*max-width: calc(100%/3);*/
+	/*background: rgba(109,154,197,.8);*/
+}
+
+#row > div
+{
+	border: 1px solid black;
+	margin: 12px 0;
+	max-width: 630px;
+	height: 20px;
+	
+}
+
+#center_1st_table > div
+{ 
+    width:100%;
+    /*margin: 0px auto 0 auto;*/
+    margin: 0 auto;
+	/*padding: 0 230px;*/
+	/*padding: 0 230px;*/
+	/*text-align: left;*/
+	/*margin-left: 230px;*/
+} /*calc(14%)*/
+
+#center_2nd_table > div
+{ 
+	width: 200px;
+	margin: 0 auto;
+	/*padding: 0 230px;*/
+	/*text-align: left;*/
+	/*margin-left: 230px;*/
+} /*calc(14%)*/

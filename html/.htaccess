@@ -1,0 +1,56 @@
+#turn on url rewriting 
+RewriteEngine on
+
+#remove the need for .html extention 
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}\.html -f 
+RewriteRule ^(.*)$ $1.html
+
+#the following lines allow the directory (platform_errors) to be
+#hidden in the URL
+# i.e.: http://IPaddr/filename would work
+#(and so would http://IPaddr/platform_errors/filename)
+RewriteBase /
+RewriteCond %{DOCUMENT_ROOT}/platform_errors/$1\.html -f
+RewriteRule ^([^.]+?)/?$ platform_errors/$1.html
+
+#the following lines allow the directory (Network_KPIs) to be
+#hidden in the URL
+# i.e.: http://IPaddr/filename would work
+#(and so would http://IPaddr/Network_KPIs/filename)
+
+RewriteCond %{DOCUMENT_ROOT}/network_KPIs/$1\.html -f
+RewriteRule ^([^.]+?)/?$ network_KPIs/$1.html
+
+
+#the following lines allow the directory (provisioning_kpis) to be
+#hidden in the URL
+# i.e.: http://IPaddr/filename would work
+#(and so would http://IPaddr/provisioning_kpis/filename)
+RewriteCond %{DOCUMENT_ROOT}/provisioning_kpis/$1\.html -f
+RewriteRule ^([^.]+?)/?$ provisioning_kpis/$1.html
+
+#the following lines allow the directory (tmp_eir_alarms) to be
+#hidden in the URL
+# i.e.: http://IPaddr/filename would work
+#(and so would http://IPaddr/tmp_eir_alarms/filename)
+RewriteCond %{DOCUMENT_ROOT}/tmp_eir_alarms/$1\.html -f
+RewriteRule ^([^.]+?)/?$ tmp_eir_alarms/$1.html
+
+
+
+
+#required to block access to the mount point through http
+RedirectMatch 403 ^/SS_Alarms_Mount_Point/?$
+RedirectMatch 403 ^/SS_Alarms_Mount_Point_Backup1/?$
+RedirectMatch 403 ^/SS_Alarms_Mount_Point_Backup2/?$
+
+#block http access to backend web page code
+RedirectMatch 403 ^/SDM_BackEnd/?$
+
+#NOTE: I MAY NEED TO CHANGE THE EXTENTION FROM "?$" TO ".*$".
+#SUBDIRECTORIES/FILES CAN STILL BE ACCESSED WITH "?$ BUT
+# WITH ".*$", THIS WILL PREVENT ANY ACCESS TO FILES WITHIN
+#THE DIRECTORY. THIS WILL HOWEVER INTERFERE WITH MY METHOD
+#OF READING THE FILE VIA JQUERY (TESTED)
+

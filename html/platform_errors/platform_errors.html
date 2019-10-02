@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset= "UTF-8">
+		<script type = "text/javascript" src = "../jquery.min.js"></script>
+		<!--Required to reference the alex_js_SHiaI_GUI.js file in /var/www/html/ directory-->
+		<script type = "text/javascript" src = "alex_platform_errors.js"></script>
+		<!--Required to reference the alex_css.css file in /var/www/html/ directory for styling-->
+		<link rel="stylesheet" type = "text/css" href="alex_platform_errors.css">
+		<!--required to store constants for SHiaI JS-->
+		<script type = "text/javascript" src = "constants.js"></script>
+		<!--required to store shared functions between scripts for SHiaI JS-->
+		<script type = "text/javascript" src = "commonPlatformErrorFunctions.js"></script>
+		
+		<!--This is the title of the website (what appears in the tab)-->
+		<title> SDM Platform errors</title>
+		<div id="LIVE_OR_HISTORY_SWITCH">
+			<label class="switch">
+			  <input type="checkbox">
+			  <div class="slider round" id= "live_or_history_id" onclick="toggleLiveOrHistory()"><!--ADDED HTML --><span class="on">LIVE</span><span class="off">HISTORY</span><!--END--></div>
+			</label>
+		</div>
+		
+		<div class="tab">
+		  <button class="tablinks active" onclick="switchTab(event, 'LIVE_ONE_NDS_ALARMS_HEAD', 'LIVE_ONE_NDS_ALARMS_BODY')">OneNDS</button>
+		  <button class="tablinks" onclick="switchTab(event, 'LIVE_HLR_HSS_ALARMS_HEAD', 'LIVE_HLR_HSS_ALARMS_BODY')">HLR/HSS</button>
+		  <button class="tablinks" onclick="switchTab(event, 'LIVE_EIR_ALARMS_HEAD', 'LIVE_EIR_ALARMS_BODY')">EIR</button>
+		  <button class="tablinks" onclick="switchTab(event, 'LIVE_CISCO_ALARMS_HEAD', 'LIVE_CISCO_ALARMS_BODY')">Cisco</button>
+		</div>
+		
+		
+		<!--------------------------------------------------------------- OneNDS HEAD (START) ------------------------------------------------------------------------------->
+		<div id="LIVE_ONE_NDS_ALARMS_HEAD" class="tabcontent">
+		  <select id="Alarm Sorting">
+			<option selected>Sort Alarms by:</option>
+			<option value="Date (oldest to newest)">Date (oldest to newest)</option>
+			<option value="Generic Condition (A to Z)">Generic Condition (A to Z)</option>
+			<option value="Severity (A to Z)">Severity (A to Z)</option>
+			<option value="Affected Hosts (A to Z)">Affected Hosts (A to Z)</option>
+			<option value="Alarm text (A to Z)">Alarm text (A to Z)</option>
+			<option value="Alarm description (A to Z)">Alarm description (A to Z)</option>
+			<option value="Instance count (most to least)">Instance count (most to least)</option>
+			<option value="Date (newest to oldest)">Date (newest to oldest)</option>
+			<option value="Generic Condition (Z to A)">Generic Condition (Z to A)</option>
+			<option value="Severity (Z to A)">Severity (Z to A)</option>
+			<option value="Affected Hosts (Z to A)">Affected Hosts (Z to A)</option>
+			<option value="Alarm text (Z to A)">Alarm text (Z to A)</option>
+			<option value="Alarm description (Z to A)">Alarm description (Z to A)</option>
+			<option value="Instance count (least to most)">Instance count (least to most)</option>
+		  </select>
+
+		  <p id="NUMBER_OF_NDS_LIVE_ALARMS"></p>
+
+		  
+		  
+		</div>
+
+	
+	<!-- NOT SURE IF THIS WILL BE REQUIRED YET (IF ITS NOT NEED TO REMOVE FROM JS, CSS, AND HERE -->
+	<div id="ONE_NDS_ALARM_HISTORY_HEAD" class="tabcontent">
+	
+		<select id="OneNDS_History_Alarm_Sorting">
+			<option selected>Sort Alarms by:</option>
+			<option value="Date (oldest to newest)" onclick="sortAlarmHistory()">Date (oldest to newest)</option>
+			<option value="Generic Condition (A to Z)" onclick="sortAlarmHistory()">Generic Condition (A to Z)</option>
+			<option value="Severity (A to Z)" onclick="sortAlarmHistory()">Severity (A to Z)</option>
+			<option value="Affected Hosts (A to Z)" onclick="sortAlarmHistory()">Affected Hosts (A to Z)</option>
+			<option value="Alarm text (A to Z)" onclick="sortAlarmHistory()">Alarm text (A to Z)</option>
+			<option value="Alarm description (A to Z)" onclick="sortAlarmHistory()">Alarm description (A to Z)</option>
+			<option value="Instance count (most to least)" onclick="sortAlarmHistory()">Instance count (most to least)</option>
+			<option value="Unique Alarm ID (A to Z)" onclick="sortAlarmHistory()">Unique Alarm ID (A to Z)</option>
+			<option value="Date (newest to oldest)" onclick="sortAlarmHistory()">Date (newest to oldest)</option>
+			<option value="Generic Condition (Z to A)" onclick="sortAlarmHistory()">Generic Condition (Z to A)</option>
+			<option value="Severity (Z to A)" onclick="sortAlarmHistory()">Severity (Z to A)</option>
+			<option value="Affected Hosts (Z to A)" onclick="sortAlarmHistory()">Affected Hosts (Z to A)</option>
+			<option value="Alarm text (Z to A)" onclick="sortAlarmHistory()">Alarm text (Z to A)</option>
+			<option value="Alarm description (Z to A)" onclick="sortAlarmHistory()">Alarm description (Z to A)</option>
+			<option value="Instance count (least to most)" onclick="sortAlarmHistory()">Instance count (least to most)</option>
+			<option value="Unique Alarm ID (Z to A)" onclick="sortAlarmHistory()">Unique Alarm ID (Z to A)</option>
+		 </select>
+		<form id="OneNDSAlarmHistoryRange" onSubmit="return false;">
+			Starting date:  <input id="start_date" type="text" name="Starting date" value="yyyy-mm-dd" 
+			onblur="if(this.value==''){ this.value='yyyy-mm-dd'; this.style.color='#BBB';}"
+			onfocus="if(this.value=='yyyy-mm-dd'){ this.value=''; this.style.color='#000';}"
+			style="color:#BBB;" /> 
+			Starting time (GMT):	<input id="start_time" type="text" name="Starting time" value="HH:MM:SS"
+			onblur="if(this.value==''){ this.value='HH:MM:SS'; this.style.color='#BBB';}"
+			onfocus="if(this.value=='HH:MM:SS'){ this.value=''; this.style.color='#000';}"
+			style="color:#BBB;" /> 
+			Ending date:    <input id="end_date" type="text" name="Ending date" value="yyyy-mm-dd"
+			onblur="if(this.value==''){ this.value='yyyy-mm-dd'; this.style.color='#BBB';}"
+			onfocus="if(this.value=='yyyy-mm-dd'){ this.value=''; this.style.color='#000';}"
+			style="color:#BBB;" /> 
+			Ending time (GMT):	<input id="end_time" type="text" name="Ending time" value="HH:MM:SS"
+			onblur="if(this.value==''){ this.value='HH:MM:SS'; this.style.color='#BBB';}"
+			onfocus="if(this.value=='HH:MM:SS'){ this.value=''; this.style.color='#000';}"
+			style="color:#BBB;" /> 
+			<br>
+			<input id="submit_history_date_range_OneNDS" type="submit" value="Submit">
+		</form>
+	
+	</div>
+	
+	<!--------------------------------------------------------------- OneNDS HEAD (END) ------------------------------------------------------------------------------->
+	
+	
+	
+	<!--------------------------------------------------------------- HLR/HSS HEAD (START) ----------------------------------------------------------------------------->
+	<div id="LIVE_HLR_HSS_ALARMS_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<div id="HLR_HSS_ALARM_HISTORY_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<!--------------------------------------------------------------- HLR/HSS HEAD (END) ----------------------------------------------------------------------------->
+
+	<!--------------------------------------------------------------- EIR HEAD (START) ----------------------------------------------------------------------------->
+	<div id="LIVE_EIR_ALARMS_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<div id="EIR_ALARM_HISTORY_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<!--------------------------------------------------------------- EIR HEAD (END) ----------------------------------------------------------------------------->
+
+	<!--------------------------------------------------------------- CISCO HEAD (START) ----------------------------------------------------------------------------->
+	<div id="LIVE_CISCO_ALARMS_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<div id="CISCO_ALARM_HISTORY_HEAD" class="tabcontent">
+	
+	</div>
+	
+	<!--------------------------------------------------------------- CISCO HEAD (END) ----------------------------------------------------------------------------->
+
+	
+	
+		
+	</head>
+
+	<body>
+		<!--<button onclick="myFunction()">Try it</button>-->
+		<!--
+		<div id = "left">
+			<div>
+				 <p><u><b>Alarms</b></u></p>
+			</div>
+		</div>
+		-->
+		<!--------------------------------------------------------------- OneNDS BODY (START) ------------------------------------------------------------------------------->
+		<div id="LIVE_ONE_NDS_ALARMS_BODY" class="tabcontent">
+			<table id="myTable">
+			  <th><b><u> Live OneNDS Alarms </u></b></th>
+			  <tr>
+			  
+			  </tr>
+			  <script> genOneNDSLiveAlarmsTable();</script>
+			</table>
+			<br>
+			
+			
+			
+			
+		  <!--<div id="test">Filtering: <input type="checkbox" id="filterCheck"></div>-->	
+		   <!--action="/action_page.php"-->
+		  <!--
+			  <div id="test">
+			  Filters: <input type="text" id="testing"><br>
+			  </div>-->
+			  <input type="button" value="Hide Alarm Text Filters" onclick="hideTextArea('FILTER_ALARMS')"/>
+			  <input type="button" value="Hide Node Filters" onclick="hideTextArea('FILTER_NODES')"/>
+			  <input type="button" value="Hide Current Settings" onclick="hideTextArea('DOWNLOADS')"/>
+			  <input type="button" value="Show Alarm Text Filters" onclick="showTextArea('FILTER_ALARMS')"/>
+			  <input type="button" value="Show Node Filters" onclick="showTextArea('FILTER_NODES')"/>
+			  <input type="button" value="Show Current Settings" onclick="showTextArea('DOWNLOADS')"/>
+			  <br>
+			  <div id="FILTER_ALARMS">
+				   Alarm Text Filters: 
+
+				 <br>
+				   <textarea rows="3" cols="235" name="comment" form="usrform" id="alarmsTextFilter"></textarea>
+				  
+				  <input type="button" value="Overwrite" id="overwriteFilterText" onclick="ajaxPostOnClick('overwriteAlarmTxtFilter','alarmsTextFilter')"/>
+				  <input type="button" value="Append" id="appendFilterText" onclick="ajaxPostOnClick('appendAlarmTxtFilter','alarmsTextFilter')"/>
+				  <input type="button" value="Clear Existing Alarm Text Filters" id="clearAlarmFilterText" onclick="ajaxPostOnClick('clearAlarmTxtFilter','clear')"/>
+
+			  </div>
+			  <br>
+			   <div id="FILTER_NODES">
+				   Node Filters: 
+
+				 <br>
+				   <textarea rows="3" cols="235" name="comment" form="usrform" id="nodeFilter"></textarea>
+				  
+				  <input type="button" value="Overwrite" id="overwriteNodeFilterText" onclick="ajaxPostOnClick('overwriteNodeTxtFilter','nodeFilter')"/>
+				  <input type="button" value="Append" id="appendNodeFilterText" onclick="ajaxPostOnClick('appendNodeTxtFilter','nodeFilter')"/>
+				  <input type="button" value="Clear Existing Node Filters" id="clearNodeFilterText" onclick="ajaxPostOnClick('clearNodeFilterText','clear')"/>
+				  
+				  
+			  </div>
+			  <br>
+			  <div id="DOWNLOADS">
+					Current settings:
+				  <br>
+				  <!-- Note that the ?ver=x.x is needed to prevent from downloading the cached text file... i.e.: downloads will now pull most recent file rather than cached file--->
+				  <a href="../AlarmFilterTxtFiles/filters.txt?ver=4.0" download="Current_Alarm_Filter_Settings.txt" id="DOWNLOAD_NDS_LIVE_ALARM_TXT_FILTER">Download Current Alarm Text filters </a>
+				  <br>
+				  <a href="../NodeFiltersTxtFiles/filters.txt?ver=3.0" download="Current_Node_Filter_Settings.txt" id="DOWNLOAD_NDS_LIVE_NODE_ALARM_FILTER">Download Current Node filters </a>
+				  <!--<br>-->
+				  <!--This 1 is going to be harder... need to call a function to read both files, then write both of them to another file... then get user to download it actually shouldnt be that hard-->
+				  <!--<a href="../someDirectoryForCombinedAlarms/filters.txt" download="Current_Node_And_Alarm_Filter_Settings.txt">Download Current Node filters </a>-->
+			  
+			  </div>
+		</div>
+		
+		
+		
+		
+		
+		<div id="ONE_NDS_ALARM_HISTORY_BODY" class="tabcontent">
+			<table id="OneNDSHistoryTable">
+			  <th><b><u> OneNDS Alarm History </u></b></th>
+			  <tr>
+			  
+			  </tr>
+			  <script> genOneNDSAlarmHistoryTable();</script>
+			</table>
+			<br>
+			  <input type="button" value="Hide Alarm Text Filters (History)" onclick="hideTextArea('FILTER_IN_ALARM_NDS_HISTORY')"/>
+			  <input type="button" value="Hide Node Filters (History)" onclick="hideTextArea('FILTER_IN_NODES_NDS_HISTORY')"/>
+			  <input type="button" value="Hide Current Settings (History)" onclick="hideTextArea('DOWNLOADS_NDS_HISTORY')"/>
+			  <input type="button" value="Show Alarm Text Filters (History)" onclick="showTextArea('FILTER_IN_ALARM_NDS_HISTORY')"/>
+			  <input type="button" value="Show Node Filters (History)" onclick="showTextArea('FILTER_IN_NODES_NDS_HISTORY')"/>
+			  <input type="button" value="Show Current Settings (History)" onclick="showTextArea('DOWNLOADS_NDS_HISTORY')"/>
+			  <br>
+			  <div id="FILTER_IN_ALARM_NDS_HISTORY">
+				   Alarm Text Filters: 
+
+				 <br>
+				   <textarea rows="3" cols="235" name="comment" form="usrform" id="NDSalarmsHistoryTextFilter"></textarea>
+				  
+				  <input type="button" value="Overwrite" id="overwriteNDSFilterTextAlarmHistory" onclick="ajaxPostOnClick('OW_NDSAlarmHistTxtFilter','NDSalarmsHistoryTextFilter')"/>
+				  <input type="button" value="Append" id="appendNDSFilterTextAlarmHistory" onclick="ajaxPostOnClick('AP_NDSAlarmHistTxtFilter','NDSalarmsHistoryTextFilter')"/>
+				  <input type="button" value="Clear Existing Alarm Text Filters" id="clearNDSAlarmFilterTextHistory" onclick="ajaxPostOnClick('CLR_NDSAlarmHistTxtFilter','clear')"/>
+
+			  </div>
+			  <br>
+			   <div id="FILTER_IN_NODES_NDS_HISTORY">
+				   Node Filters: 
+
+				 <br>
+				   <textarea rows="3" cols="235" name="comment" form="usrform" id="NDShistoryNodeFilter"></textarea>
+				  
+				  <input type="button" value="Overwrite" id="overwriteNDSNodeFilterTextHistory" onclick="ajaxPostOnClick('OW_NDSNodeHistTxtFilter','NDShistoryNodeFilter')"/>
+				  <input type="button" value="Append" id="appendNDSNodeFilterTextHistory" onclick="ajaxPostOnClick('AP_NDSNodeHistTxtFilter','NDShistoryNodeFilter')"/>
+				  <input type="button" value="Clear Existing Node Filters" id="clearNDSNodeFilterTextHistory" onclick="ajaxPostOnClick('CLR_NDSNodeHistTxtFilter','clear')"/>
+				  
+				  
+			  </div>
+			  <br>
+			  <div id="DOWNLOADS_NDS_HISTORY">
+					Current settings:
+				  <br>
+				  <a href="../OneNDS_Alarm_Txt_History_Filter/filters.txt?ver=2.1" download="Alarm_History_Filter_Settings.txt" id="DOWNLOAD_NDS_HISTORY_ALARM_TXT_FILTER">Download Current Alarm Text filters (History) </a>
+				  <br>
+				  <a href="../OneNDS_Node_Txt_History_Filter/filters.txt?ver=1.1" download="Current_Node_Filter_Settings.txt" id="DOWNLOAD_NDS_HISTORY_NODE_ALARM_FILTER">Download Current Node filters (History)</a>
+			  
+			  </div>			
+			
+		</div>
+		<!--------------------------------------------------------------- OneNDS BODY (END) ------------------------------------------------------------------------------->
+		
+		<!--------------------------------------------------------------- HLR/HSS BODY (START) ----------------------------------------------------------------------------->
+		<div id="LIVE_HLR_HSS_ALARMS_BODY" class="tabcontent">
+		
+		</div>
+		
+		<div id="HLR_HSS_ALARM_HISTORY_BODY" class="tabcontent">
+		
+		</div>
+		
+		<!--------------------------------------------------------------- HLR/HSS BODY (END) ----------------------------------------------------------------------------->
+		
+		<!--------------------------------------------------------------- EIR BODY (START) ----------------------------------------------------------------------------->
+		<div id="LIVE_EIR_ALARMS_BODY" class="tabcontent">
+		
+		</div>
+		
+		<div id="EIR_ALARM_HISTORY_BODY" class="tabcontent">
+		
+		</div>
+		
+		<!--------------------------------------------------------------- EIR BODY (END) ----------------------------------------------------------------------------->
+	
+		<!--------------------------------------------------------------- CISCO BODY (START) ----------------------------------------------------------------------------->
+		<div id="LIVE_CISCO_ALARMS_BODY" class="tabcontent">
+		
+		</div>
+		
+		<div id="CISCO_ALARM_HISTORY_BODY" class="tabcontent">
+		
+		</div>
+		
+		<!--------------------------------------------------------------- CISCO BODY (END) ----------------------------------------------------------------------------->
+		
+		
+		
+		
+		
+		
+		<script>displayOnPage()</script>
+		  <!--<input type="submit" value="Submit" onclick="filterOnClick()"/>-->
+	  
+		<!--<input type="submit" value="Submit">-->
+		
+	</body>
+</html>
+

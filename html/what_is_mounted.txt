@@ -1,0 +1,12 @@
+Filesystem                                                1K-blocks    Used Available Use% Mounted on
+udev                                                        8206824       0   8206824   0% /dev
+tmpfs                                                       1643220  172756   1470464  11% /run
+/dev/vda1                                                 101584140 7138248  94429508   8% /
+tmpfs                                                       8216096       0   8216096   0% /dev/shm
+tmpfs                                                          5120       0      5120   0% /run/lock
+tmpfs                                                       8216096       0   8216096   0% /sys/fs/cgroup
+root@dbmtor001:/opt/mgtservices/statusService/live/        10190100  250744   9922972   3% /var/www/html/SS_Alarms_Mount_Point_Backup1
+root@dbmtor002:/opt/mgtservices/statusService/live/        10190100  263996   9909720   3% /var/www/html/SS_Alarms_Mount_Point
+ubuntu@10.55.105.229:/home/ubuntu/live_bdsa_fds_tps_kpis/  81254044 7955780  73281880  10% /var/www/html/BDS_FDS_TPS_KPI
+root@dbmmtl001:/opt/mgtservices/statusService/live/        10190100  243132   9930584   3% /var/www/html/SS_Alarms_Mount_Point_Backup2
+tmpfs                                                       1643220       0   1643220   0% /run/user/1000
